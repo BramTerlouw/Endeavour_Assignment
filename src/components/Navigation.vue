@@ -28,7 +28,7 @@ export default {
   display: flex;
   position: relative;
 
-  background-color: #2B2D42;
+  background-color: #2B2118;
 }
 
 .nav-list {
@@ -40,7 +40,7 @@ export default {
 
   margin: 70px auto 20px auto;
 
-  background-color: #2B2D42;
+  background-color: #2B2118;
   list-style: none;
   text-align: center;
   transition: 0 ease-in;

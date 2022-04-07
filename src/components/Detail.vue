@@ -1,12 +1,17 @@
 <template>
+  <header class="detail-header">
+    <h1>Collection item details:</h1>
+  </header>
   <main class="collection-content">
+    <img :src=product.url alt="collection item image">
       <div class="detail-text">
-          <p>ID: {{product.id}}</p>
-          <p>Title: {{product.title}}</p>
-          <p>Maker: {{product.principalOrFirstMaker}}</p>
-          <p>Description: {{product.description}}</p>
+          <p class="detail-text-item"><span>ID:</span> {{product.id}}</p>
+          <p class="detail-text-item"><span>Title:</span> {{product.title}}</p>
+          <p class="detail-text-item"><span>Long title:</span> {{product.title}}</p>
+          <p class="detail-text-item"><span>Maker:</span> {{product.principalOrFirstMaker}}</p>
+          <p class="detail-text-item"><span>Medium:</span> {{product.physicalMedium}}</p>
+          <p class="detail-text-item"><span>Description:</span> {{product.description}}</p>
       </div>
-      <img :src=product.url alt="collection item image">
   </main>
 </template>
 
@@ -21,8 +26,10 @@ export default {
       product: {
         id: "",
         title: "",
+        longTitle: "",
         url: "",
         principalOrFirstMaker: "",
+        physicalMedium: "",
         description: "",
       },
     };
@@ -36,8 +43,10 @@ export default {
 
         this.product.id = data.id;
         this.product.title = data.title;
+        this.product.longTitle = data.longTitle;
         this.product.url = data.webImage.url;
         this.product.principalOrFirstMaker = data.principalOrFirstMaker;
+        this.product.physicalMedium = data.physicalMedium;
         this.product.description = data.description;
         console.log(this.product);
         })
@@ -51,13 +60,51 @@ export default {
 </script>
 
 <style>
+.detail-header {
+  width: 80%;
+  margin: 20px auto 0 auto;
+}
+
 .collection-content {
     width: 80%;
-    border: 1px solid black;
     margin: 0 auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .collection-content img {
+    width: 49%;
+    border-radius: 10px;
+}
+
+.detail-text {
+  width: 49%;
+  padding: 5px;
+  background: #F7F3E3;
+  border-radius: 10px;
+}
+
+.detail-text-item {
+  margin: 0 0 10px 0;
+}
+
+.detail-text-item span {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 700px) {
+  .collection-content {
+    flex-direction: column;
+  }
+
+  .collection-content img, .detail-text {
     width: 100%;
+  }
+
+  .detail-text {
+    margin: 10px 0 0 0;
+  }
 }
 </style>

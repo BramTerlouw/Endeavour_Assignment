@@ -11,7 +11,7 @@
   </header>
 
   <section class="collection-option-section">
-      <input v-model="filter_string" type="text" name="collection-filter-text" class="collection-filter-text" placeholder="Filter...">
+      <input v-model="filter_string" @change="fetchWithFilter()" type="text" name="collection-filter-text" class="collection-filter-text" placeholder="Filter...">
   </section>
 
   <main class="collection">
@@ -35,13 +35,22 @@ export default {
   methods: {
     fetch() {
       axios
-        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=ka")
+        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=")
         .then((res) => {
           this.collection = res.data['artObjects'];
           console.log(this.collection[0]);
         })
         .catch((error) => console.log(error));
     },
+    fetchWithFilter() {
+      axios
+        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=" + this.filter_string)
+        .then((res) => {
+          this.collection = res.data['artObjects'];
+          console.log(this.collection[0]);
+        })
+        .catch((error) => console.log(error));
+    }
   },
   mounted() {
       this.fetch();
@@ -56,7 +65,7 @@ export default {
 
   display: grid;
   place-content: center;
-  background-color: #edf2f4;
+  background-color: #F7F3E3;
 }
 
 .header-content {
@@ -66,7 +75,7 @@ export default {
 }
 
 .header-content span {
-  color: #ef233c;
+  color: #6F1A07;
 }
 
 .header-title {
@@ -82,7 +91,7 @@ export default {
   min-height: 50px;
   margin: 0 0 20px;
 
-  background-color: #8d99ae;
+  background-color: #B3B6B7;
 }
 
 .collection-filter-text {
