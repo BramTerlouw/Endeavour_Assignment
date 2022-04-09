@@ -1,6 +1,6 @@
 <template>
     <div class="collection-item">
-        <img :src=item.webImage.url alt="collection item image">
+        <img v-if="item.hasImage == true" :src=item.webImage.url alt="collection item image">
         <div class="item-form">
             <div class="text-wrapper">
                 <p>ID: {{item.id}}</p>

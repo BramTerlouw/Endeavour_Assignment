@@ -11,12 +11,16 @@
   </header>
 
   <section class="collection-option-section">
-      <input v-model="filter_string" @change="fetchWithFilter()" type="text" name="collection-filter-text" class="collection-filter-text" placeholder="Filter...">
+      <input v-model="filter_string" @change="fetch()" type="text" name="collection-filter-text" class="collection-filter-text" placeholder="Filter...">
   </section>
 
   <main class="collection">
     <griditem v-for="item in collection" :key="item" :item="item"></griditem>
   </main>
+  <div class="pagination-wrapper">
+      <button class="pagination-btn" v-on:click="fetchBack()">Back</button>
+      <button class="pagination-btn" v-on:click="fetchNext()">Next</button>
+    </div>
 </template>
 
 <script>
@@ -30,23 +34,36 @@ export default {
     return {
       collection: [],
       filter_string: "",
+      page: 0,
+      page_Items: 6,
     }
   },
   methods: {
     fetch() {
       axios
-        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=")
+        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&p=" + this.page +"&ps=" + this.page_Items + "&q=" + this.filter_string)
         .then((res) => {
-          this.collection = res.data['artObjects'];
+          if (res.data['artObjects'] != null) {
+            console.log(res.data['artObjects']);
+            this.collection = res.data['artObjects'];
+          }
         })
         .catch((error) => console.log(error));
     },
-    fetchWithFilter() {
+    fetchBack() {
+      if (this.page > 0) {
+        this.page -= 1;
+        this.fetch();
+      }
+    },
+    fetchNext() {
       axios
-        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=" + this.filter_string)
+        .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&p=" + (this.page + 1) +"&ps=" + this.page_Items + "&q=" + this.filter_string)
         .then((res) => {
-          if (res.data['artObjects'] != null) {
-          this.collection = res.data['artObjects'];
+          if (res.data['artObjects'].length > 0) {
+            this.page += 1;
+            this.collection = res.data['artObjects'];
+            console.log(res.data['artObjects'])
           }
         })
         .catch((error) => console.log(error));
@@ -109,6 +126,20 @@ export default {
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 30px;
+}
+
+.pagination-wrapper {
+  width: 20%;
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.pagination-btn {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 480px) {

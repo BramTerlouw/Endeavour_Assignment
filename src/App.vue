@@ -16,10 +16,10 @@ export default {
 
 <style>
 :root {
-  --color-dark: #2B2D42;
-  --color-medium: #8D99AE;
-  --color-light: #EDF2F4;
-  --color-accent: #EF233C;
+  --color-dark: #2B2118;
+  --color-medium: #B3B6B7;
+  --color-light: #F7F3E3;
+  --color-accent: #AF9164;
 }
 
 #app {
