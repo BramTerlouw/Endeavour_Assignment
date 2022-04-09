@@ -4,7 +4,7 @@
       <h1 class="header-title">Welcome to <span>Rijksmuseam</span>.</h1>
       <p class="header-text">
         Using the Rijksmuseam API, all information about our art can be found
-        here. Feel free to look around and in the amazing collection of
+        here. Feel free to look around in the amazing collection of
         Rijksmuseum.
       </p>
     </div>
@@ -38,7 +38,6 @@ export default {
         .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=")
         .then((res) => {
           this.collection = res.data['artObjects'];
-          console.log(this.collection[0]);
         })
         .catch((error) => console.log(error));
     },
@@ -48,7 +47,6 @@ export default {
         .then((res) => {
           if (res.data['artObjects'] != null) {
           this.collection = res.data['artObjects'];
-          console.log(this.collection[0]);
           }
         })
         .catch((error) => console.log(error));

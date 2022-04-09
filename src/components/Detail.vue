@@ -48,7 +48,6 @@ export default {
         this.product.principalOrFirstMaker = data.principalOrFirstMaker;
         this.product.physicalMedium = data.physicalMedium;
         this.product.description = data.description;
-        console.log(this.product);
         })
         .catch((error) => console.log(error));
     },
