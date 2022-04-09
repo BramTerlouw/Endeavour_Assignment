@@ -81,7 +81,7 @@ export default {
 
 .detail-text {
   width: 49%;
-  padding: 5px;
+  padding: 10px;
   background: #F7F3E3;
   border-radius: 10px;
 }

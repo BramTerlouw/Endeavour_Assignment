@@ -46,8 +46,10 @@ export default {
       axios
         .get("https://www.rijksmuseum.nl/api/nl/collection?key=Lhmu9BZx&q=" + this.filter_string)
         .then((res) => {
+          if (res.data['artObjects'] != null) {
           this.collection = res.data['artObjects'];
           console.log(this.collection[0]);
+          }
         })
         .catch((error) => console.log(error));
     }
